@@ -10,7 +10,7 @@ README = (ROOT / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="mannaggia",
-    version="0.1.2",
+    version="0.1.3",
     description="mannaggia is a python application to praise or more likely to curse the saints.",
     long_description=README,
     long_description_content_type="text/markdown",
