@@ -1,17 +1,27 @@
-# Mannaggia-py
+# Mannaggia-py 👼
 
-Remember [Mannaggia](https://github.com/LegolasTheElf/mannaggia)? This is the Python remake, with new features.
+<p align="center">
+  <img src="/assets/logo.png" width="128" height="128" />
+</p>
 
-## Features 👼
+Remember [Mannaggia](https://github.com/LegolasTheElf/mannaggia)? This is a Python remake of it, with new features.
 
-- Support for different dictionary of "santi"
+mannaggia is a python application to praise or more likely to **curse** the saints.
+
+When mannaggia is started, it will start naming all the known saints (and more!), preeceding their name with a curse (such as `mannaggia a xxxxx`) or with a praise (such as `lode a xxxxx`).
+
+ This tool is extremely suggested to be used during an intense debugging session or when implementing those kinds of tasks that makes you want to resign from your job.
+
+## Features 🐷
+
+- Support for different dictionary of saints
   - local storage file (see [factory.py](mannaggia/santi/factory.py))
   - <http://www.beatiesanti.it>
   - local file (read line by line)
 - Support for different text-to-speech engines
   - google translator
   - mozilla tts
-- Automatically plays the sound using pydub. You can check here the requirements to play audio: <https://github.com/jiaaro/pydub#playback>.
+- Automatically plays the sound using **pydub**. You can check here the requirements to play audio: <https://github.com/jiaaro/pydub#playback>.
 
 ## Get started 🚀
 
