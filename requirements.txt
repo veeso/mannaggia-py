@@ -1,4 +1,4 @@
 appdirs>=1.4.0
 click>=8.0.0
-pydub>=0.25.0
+pydub>=0.20.0
 requests>=2.20.0

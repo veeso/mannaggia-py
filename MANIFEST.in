@@ -1,0 +1,4 @@
+include assets/
+include config/
+include README.md
+include LICENSE

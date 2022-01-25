@@ -4,6 +4,48 @@
   <img src="/assets/logo.png" width="128" height="128" />
 </p>
 
+<p align="center">~ mannaggia is a python application to praise or more likely to curse the saints. ~</p>
+<p align="center">
+  <a href="https://ko-fi.com/veeso" target="_blank">Ko-fi</a>
+  ·
+  <a href="#get-started-">Installation</a>
+  ·
+  <a href="CHANGELOG.md" target="_blank">Changelog</a>
+</p>
+
+<p align="center">Developed by <a href="https://veeso.github.io/" target="_blank">@veeso</a></p>
+<p align="center">Current version: 0.1.0 (25/01/2022)</p>
+
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"
+    ><img
+      src="https://img.shields.io/badge/License-MIT-teal.svg"
+      alt="License-MIT"
+  /></a>
+  <a href="https://github.com/veeso/mannaggia-py/stargazers"
+    ><img
+      src="https://img.shields.io/github/stars/veeso/mannaggia-py.svg"
+      alt="Repo stars"
+  /></a>
+  <a href="https://pepy.tech/project/mannaggia"
+    ><img
+      src="https://pepy.tech/badge/mannaggia"
+      alt="Downloads counter"
+  /></a>
+  <a href="https://pypi.org/project/mannaggia/"
+    ><img
+      src="https://badge.fury.io/py/mannaggia.svg"
+      alt="Latest version"
+  /></a>
+  <a href="https://ko-fi.com/veeso">
+    <img
+      src="https://img.shields.io/badge/donate-ko--fi-red"
+      alt="Ko-fi"
+  /></a>
+</p>
+
+---
+
 Remember [Mannaggia](https://github.com/LegolasTheElf/mannaggia)? This is a Python remake of it, with new features.
 
 mannaggia is a python application to praise or more likely to **curse** the saints.
