@@ -14,7 +14,7 @@ from abc import ABCMeta, abstractmethod
 from pydub import AudioSegment
 
 
-class TtsError(Exception):
+class TTSError(Exception):
     """
     TTS Error
     """
@@ -29,7 +29,7 @@ class TtsError(Exception):
         return str(self.message)
 
 
-class TtsClient(object):
+class TTSClient(object):
     """TTS client to get speech for string"""
 
     __metaclass__ = ABCMeta

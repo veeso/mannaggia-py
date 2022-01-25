@@ -12,17 +12,22 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 """
 
+from appdirs import user_config_dir
 import click
+import os.path
 from random import shuffle
 from sys import exit, maxsize
-from typing import List
+from typing import List, Optional, Dict
 
 
 from .santi.factory import Factory as SantiFactory
 from .santi.santo import Santo
 from .speech.speaker import Speaker
-from .speech.tts import TtsClient
+from .speech.tts import TTSClient
 from .speech.google_translate import GoogleTranslateTTS
+from .speech.mozilla import MozillaTTS
+
+MOZILLA_TTS_CONFIG_DIR = os.path.join(user_config_dir(), "tts/.models.json")
 
 
 def get_santi(dictionary: str) -> List[Santo]:
@@ -32,11 +37,16 @@ def get_santi(dictionary: str) -> List[Santo]:
     }[dictionary]()
 
 
-def get_tts_engine(tts: str) -> TtsClient:
+def get_tts_engine(tts: str, params: Dict[str, Optional[str]]) -> TTSClient:
     """Get tts engine by name"""
-    return {
-        "google": GoogleTranslateTTS(),
-    }[tts]
+    if tts == "google":
+        return GoogleTranslateTTS()
+    elif tts == "mozilla":
+        return MozillaTTS(
+            params["model_name"], params["config_file"], params["vocoder_name"]
+        )
+    else:
+        raise NotImplementedError("Unknown tts engine %s" % tts)
 
 
 @click.command()
@@ -62,13 +72,36 @@ def get_tts_engine(tts: str) -> TtsClient:
     "--tts",
     "-t",
     default="google",
-    help="Specify text-to-speech engine. Default: 'google'; available options: ['google']",
+    help="Specify text-to-speech engine. Default: 'google'; available options: ['google', 'mozilla']",
 )
-def main(amount: int, dictionary: str, prefix: str, tts: str) -> None:
+@click.option("--model_name", default=None, help="Specify model name for mozilla tts")
+@click.option(
+    "--vocoder_name", default=None, help="Specify vocoder name for mozilla tts"
+)
+@click.option(
+    "--config_file",
+    default=MOZILLA_TTS_CONFIG_DIR,
+    help="Specify config file path for mozilla tts",
+)
+def main(
+    amount: int,
+    dictionary: str,
+    prefix: str,
+    tts: str,
+    model_name: Optional[str],
+    vocoder_name: Optional[str],
+    config_file: Optional[str],
+) -> None:
     # get dictionary
     santi = get_santi(dictionary)
     shuffle(santi)
-    tts_engine = get_tts_engine(tts)
+    # make tts engine
+    tts_params = {
+        "config_file": config_file,
+        "model_name": model_name,
+        "vocoder_name": vocoder_name,
+    }
+    tts_engine = get_tts_engine(tts, tts_params)
     speaker = Speaker()
     cursor = 0
     for _ in range(amount):

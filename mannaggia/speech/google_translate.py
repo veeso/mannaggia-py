@@ -10,13 +10,13 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 """
 
-from .tts import AudioSegment, TtsClient, TtsError
+from .tts import AudioSegment, TTSClient, TTSError
 
 import requests
 from tempfile import NamedTemporaryFile
 
 
-class GoogleTranslateTTS(TtsClient):
+class GoogleTranslateTTS(TTSClient):
     def __init__(self) -> None:
         super().__init__()
 
@@ -31,4 +31,4 @@ class GoogleTranslateTTS(TtsClient):
             temp.write(response)
             return AudioSegment.from_mp3(temp.name)
         except Exception as e:
-            raise TtsError(e)
+            raise TTSError(e)
