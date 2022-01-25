@@ -14,13 +14,13 @@ When mannaggia is started, it will start naming all the known saints (and more!)
 
 ## Features 🐷
 
-- Support for different dictionary of saints
+- Support for different **dictionaries of saints**
   - local storage file (see [factory.py](mannaggia/santi/factory.py))
   - <http://www.beatiesanti.it>
   - local file (read line by line)
-- Support for different text-to-speech engines
-  - google translator
-  - mozilla tts
+- Support for different **text-to-speech** engines
+  - Google Translator
+  - [Mozilla TTS](https://github.com/mozilla/TTS)
 - Automatically plays the sound using **pydub**. You can check here the requirements to play audio: <https://github.com/jiaaro/pydub#playback>.
 
 ## Get started 🚀
@@ -47,7 +47,7 @@ When mannaggia is started, it will start naming all the known saints (and more!)
 
 ### Mozilla tts 🦊
 
-To beging, you need to install mozilla tts on your machine with `pip3 install tts`.
+To get started with mozilla tts, you need to install mozilla tts on your machine with `pip3 install tts`.
 
 In order to use mozilla TTS as text to speech engine for mannaggia, you need to provide the following options when running mannaggia:
 
