@@ -12,8 +12,11 @@
 
 from .tts import AudioSegment, TTSClient, TTSError
 
-from TTS.utils.manage import ModelManager
-from TTS.utils.synthesizer import Synthesizer
+try:
+    from TTS.utils.manage import ModelManager
+    from TTS.utils.synthesizer import Synthesizer
+except ImportError:
+    pass
 from tempfile import NamedTemporaryFile
 from typing import Optional
 
