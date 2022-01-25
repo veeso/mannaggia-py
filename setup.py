@@ -28,7 +28,7 @@ setup(
         "pathlib2>=2",
     ],
     entry_points={"console_scripts": ["mannaggia = mannaggia.__main__:main"]},
-    packages=find_packages(exclude=("tests",)),
+    packages=find_packages(),
     keywords=["mannaggia", "debugging-tools", "italian-debugging-tool"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
