@@ -10,4 +10,4 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 """
 
-VERSION = "0.1.1"
+VERSION = "0.1.2"
