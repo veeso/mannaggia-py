@@ -17,15 +17,15 @@ from tempfile import NamedTemporaryFile
 from urllib.parse import quote
 
 
-class GoogleTranslateTTS(TTSClient):
+class ISpeechTTS(TTSClient):
     def __init__(self) -> None:
         super().__init__()
 
     def get_speech(self, s: str) -> AudioSegment:
-        """Get speech from google translator api"""
+        """Get speech from ispeech api"""
         try:
             response = requests.get(
-                "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=%s&tl=it"
+                "http://www.ispeech.org/p/generic/getaudio?text=%s%%2C&voice=euritalianmale&speed=0&action=convert"
                 % quote(s)
             ).content
             temp = NamedTemporaryFile("wb")

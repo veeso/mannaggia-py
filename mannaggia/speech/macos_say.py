@@ -12,24 +12,25 @@
 
 from .tts import AudioSegment, TTSClient, TTSError
 
-import requests
+import os
+import subprocess
 from tempfile import NamedTemporaryFile
-from urllib.parse import quote
 
 
-class GoogleTranslateTTS(TTSClient):
+class MacOsTTS(TTSClient):
     def __init__(self) -> None:
         super().__init__()
 
     def get_speech(self, s: str) -> AudioSegment:
-        """Get speech from google translator api"""
+        """Get speech with macos `say` command"""
         try:
-            response = requests.get(
-                "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=%s&tl=it"
-                % quote(s)
-            ).content
-            temp = NamedTemporaryFile("wb")
-            temp.write(response)
-            return AudioSegment.from_mp3(temp.name)
+            temp = NamedTemporaryFile("w", suffix=".aiff")
+            devnull = open(os.devnull, "w")
+            subprocess.call(
+                ["say", "-v", "Alice", "-o", temp.name, s],
+                stdout=devnull,
+                stderr=devnull,
+            )
+            return AudioSegment.from_file(temp.name)
         except Exception as e:
             raise TTSError(e)

@@ -28,8 +28,7 @@ class Factory(object):
     def make_santi_from_file(file: str) -> List[Santo]:
         """Make santi dictionary from a file (line by line)"""
         with open(file) as f:
-            return list(map(lambda x : Santo(x.strip()), f.readlines()))
-
+            return list(map(lambda x: Santo(x.strip()), f.readlines()))
 
     @staticmethod
     def make_santi_from_local() -> List[Santo]:

@@ -60,30 +60,39 @@ When mannaggia is started, it will start naming all the known saints (and more!)
   - local storage file (see [factory.py](mannaggia/santi/factory.py))
   - <http://www.beatiesanti.it>
   - local file (read line by line)
-- Support for different **text-to-speech** engines
-  - Google Translator
+- Support for different **text-to-speech** engines:
+  - [espeak](http://espeak.sourceforge.net/)
+  - [Google Translator](https://translate.google.it)
+  - [iSpeech](http://www.ispeech.org)
+  - **MacOs voice-over**
   - [Mozilla TTS](https://github.com/mozilla/TTS)
 - Automatically plays the sound using **pydub**. You can check here the requirements to play audio: <https://github.com/jiaaro/pydub#playback>.
 
 ## Get started 🚀
 
-1. Install requirements
-
-    ```sh
-    pip3 install -r requirements.txt
-    ```
-
-2. Install mannaggia
+1. Install mannaggia with pip
 
     ```sh
     pip3 install mannaggia
     ```
 
-3. Run mannaggia
+2. Run mannaggia
 
     ```sh
     mannaggia --help
     ```
+
+    or in case it's still not available in your path
+
+    ```sh
+    python3 -m mannaggia
+    ```
+
+In case you're missing some dependencies after installation, run:
+
+```sh
+pip3 install -r requirements.txt
+```
 
 ---
 
