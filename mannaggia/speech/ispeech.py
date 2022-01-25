@@ -12,6 +12,7 @@
 
 from .tts import AudioSegment, TTSClient, TTSError
 
+from os import unlink
 import requests
 from tempfile import NamedTemporaryFile
 from urllib.parse import quote
@@ -28,8 +29,11 @@ class ISpeechTTS(TTSClient):
                 "http://www.ispeech.org/p/generic/getaudio?text=%s%%2C&voice=euritalianmale&speed=0&action=convert"
                 % quote(s)
             ).content
-            temp = NamedTemporaryFile("wb")
-            temp.write(response)
-            return AudioSegment.from_mp3(temp.name)
+            with NamedTemporaryFile(delete=False) as temp:
+                temp.write(response)
+                temp.close()
+                audio = AudioSegment.from_mp3(temp.name)
+            unlink(temp.name)
+            return audio
         except Exception as e:
             raise TTSError(e)

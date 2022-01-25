@@ -17,6 +17,7 @@ try:
     from TTS.utils.synthesizer import Synthesizer
 except ImportError:
     pass
+from os import unlink
 from tempfile import NamedTemporaryFile
 from typing import Optional
 
@@ -50,8 +51,11 @@ class MozillaTTS(TTSClient):
     def get_speech(self, s: str) -> AudioSegment:
         try:
             wav = self.__synth.tts(s)
-            temp = NamedTemporaryFile("wb")
-            self.__synth.save_wav(wav, temp.name)
-            return AudioSegment.from_wav(temp.name)
+            with NamedTemporaryFile(delete=False) as temp:
+                temp.close()
+                self.__synth.save_wav(wav, temp.name)
+                audio = AudioSegment.from_wav(temp.name)
+            unlink(temp.name)
+            return audio
         except Exception as e:
             raise TTSError(e)

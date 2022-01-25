@@ -12,7 +12,7 @@
 
 import os
 from pydub import AudioSegment
-from pydub.playback import get_player_name
+from pydub.playback import play, get_player_name
 import subprocess
 from tempfile import NamedTemporaryFile
 
@@ -22,11 +22,16 @@ class Speaker(object):
         super().__init__()
 
     def play(self, audio: AudioSegment) -> None:
-        with NamedTemporaryFile("w+b", suffix=".wav") as f:
-            audio.export(f.name, "wav")
-            devnull = open(os.devnull, "w")
-            subprocess.call(
-                [get_player_name(), "-nodisp", "-autoexit", "-hide_banner", f.name],
-                stdout=devnull,
-                stderr=devnull,
-            )
+        if os.name == 'nt':
+            play(audio)
+        else: # don't print crap
+            with NamedTemporaryFile("w+b", suffix=".wav", delete=False) as f:
+                audio.export(f.name, "wav")
+                devnull = open(os.devnull, "w")
+                f.close()
+                subprocess.call(
+                    [get_player_name(), "-nodisp", "-autoexit", "-hide_banner", f.name],
+                    stdout=devnull,
+                    stderr=devnull,
+                )
+                os.unlink(f.name)

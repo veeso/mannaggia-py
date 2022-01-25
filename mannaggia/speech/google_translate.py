@@ -13,6 +13,7 @@
 from .tts import AudioSegment, TTSClient, TTSError
 
 import requests
+from os import unlink
 from tempfile import NamedTemporaryFile
 from urllib.parse import quote
 
@@ -28,8 +29,11 @@ class GoogleTranslateTTS(TTSClient):
                 "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=%s&tl=it"
                 % quote(s)
             ).content
-            temp = NamedTemporaryFile("wb")
-            temp.write(response)
-            return AudioSegment.from_mp3(temp.name)
+            with NamedTemporaryFile(delete=False) as temp:
+                temp.write(response)
+                temp.close()
+                audio = AudioSegment.from_mp3(temp.name)
+            unlink(temp.name)
+            return audio
         except Exception as e:
             raise TTSError(e)
