@@ -30,11 +30,15 @@ from .speech.mozilla import MozillaTTS
 MOZILLA_TTS_CONFIG_DIR = os.path.join(user_config_dir(), "tts/.models.json")
 
 
-def get_santi(dictionary: str) -> List[Santo]:
-    return {
-        "local": SantiFactory.make_santi_from_local,
-        "santiebeati.it": SantiFactory.make_santi_from_santiebeati,
-    }[dictionary]()
+def get_santi(dictionary: str, params: Dict[str, Optional[str]]) -> List[Santo]:
+    if dictionary == "local":
+        return SantiFactory.make_santi_from_local()
+    elif dictionary == "file":
+        return SantiFactory.make_santi_from_file(params['file'])
+    elif dictionary == "santiebeati.it":
+        return SantiFactory.make_santi_from_santiebeati()
+    else:
+        raise NotImplementedError("Unknown santi backend %s" % dictionary)
 
 
 def get_tts_engine(tts: str, params: Dict[str, Optional[str]]) -> TTSClient:
@@ -60,7 +64,13 @@ def get_tts_engine(tts: str, params: Dict[str, Optional[str]]) -> TTSClient:
     "--dictionary",
     "-d",
     default="local",
-    help="Specify the dictionary to get santi from. Default 'local'; available options: ['local', 'santiebeati.it']",
+    help="Specify the dictionary to get santi from. Default 'local'; available options: ['local', 'file', 'santiebeati.it']",
+)
+@click.option(
+    "--dictionary_file",
+    '-D',
+    default=None,
+    help="Specify the dictionary file (required if dictionary is 'file')"
 )
 @click.option(
     "--prefix",
@@ -86,6 +96,7 @@ def get_tts_engine(tts: str, params: Dict[str, Optional[str]]) -> TTSClient:
 def main(
     amount: int,
     dictionary: str,
+    dictionary_file: Optional[str],
     prefix: str,
     tts: str,
     model_name: Optional[str],
@@ -93,7 +104,7 @@ def main(
     config_file: Optional[str],
 ) -> None:
     # get dictionary
-    santi = get_santi(dictionary)
+    santi = get_santi(dictionary, {'file': dictionary_file})
     shuffle(santi)
     # make tts engine
     tts_params = {

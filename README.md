@@ -7,6 +7,7 @@ Remember [Mannaggia](https://github.com/LegolasTheElf/mannaggia)? This is the Py
 - Support for different dictionary of "santi"
   - local storage file (see [factory.py](mannaggia/santi/factory.py))
   - <http://www.beatiesanti.it>
+  - local file (read line by line)
 - Support for different text-to-speech engines
   - google translator
   - mozilla tts
@@ -32,6 +33,8 @@ Remember [Mannaggia](https://github.com/LegolasTheElf/mannaggia)? This is the Py
     mannaggia --help
     ```
 
+---
+
 ### Mozilla tts 🦊
 
 To beging, you need to install mozilla tts on your machine with `pip3 install tts`.
@@ -42,9 +45,27 @@ In order to use mozilla TTS as text to speech engine for mannaggia, you need to 
 mannaggia --model_name $MODEL_NAME -t mozilla
 ```
 
-where model name is something like `tts_models/de/thorsten/tacotron2-DCA` in addition to this you need also to provide the `--config_path` argument, which must be the file containing the models list.
+where model name is something like `tts_models/de/thorsten/tacotron2-DCA` in addition to this you need also to provide the `--config_file` argument, which must be the file containing the models list.
 
-The default configuration file, can be found at <https://raw.githubusercontent.com/mozilla/TTS/master/TTS/.models.json>.
+The default configuration file, can be found at <https://raw.githubusercontent.com/mozilla/TTS/master/TTS/.models.json> or in this repository at [config/models.json](config/models.json).
+
+example:
+
+```sh
+mannaggia --model_name tts_models/fr/mai/tacotron2-DDC --config_file config/models.json -t mozilla --prefix "Va te faire enculer"
+```
+
+### File as a dictionary
+
+You can opt to use a text file as a dictionary. To do so, it'll be enough to write line by line the name of the "characters" to invoke in mannaggia.
+
+example:
+
+```sh
+mannaggia -d file -D ./config/dictionary.txt
+```
+
+---
 
 ## License 📜
 
