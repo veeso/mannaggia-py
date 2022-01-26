@@ -17,10 +17,10 @@
 <p align="center">Current version: 0.1.3 (25/01/2022)</p>
 
 <p align="center">
-  <a href="https://opensource.org/licenses/MIT"
+  <a href="http://www.wtfpl.net/about/"
     ><img
-      src="https://img.shields.io/badge/License-MIT-teal.svg"
-      alt="License-MIT"
+      src="https://img.shields.io/badge/License-WTFPL-blue.svg"
+      alt="License-WTFPL"
   /></a>
   <a href="https://github.com/veeso/mannaggia-py/stargazers"
     ><img
