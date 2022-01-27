@@ -29,6 +29,7 @@ from .speech.google_translate import GoogleTranslateTTS
 from .speech.ispeech import ISpeechTTS
 from .speech.macos_say import MacOsTTS
 from .speech.mozilla import MozillaTTS
+from .stats import Stats
 
 MOZILLA_TTS_CONFIG_DIR = os.path.join(user_config_dir(), "tts/.models.json")
 
@@ -131,6 +132,9 @@ def main(
     }
     tts_engine = get_tts_engine(tts, tts_params)
     speaker = Speaker()
+    # init stats
+    stats = Stats()
+    # init dict cursor
     cursor = 0
     for _ in range(amount):
         try:
@@ -139,12 +143,20 @@ def main(
             print(text)
             speech = tts_engine.get_speech(text)
             speaker.play(speech)
+            # incr saint named
+            stats.saint_named()
             # adjust cursor (rewind)
             cursor += 1
             if cursor >= len(santi):
                 cursor = 0
         except KeyboardInterrupt:
-            exit(0)
+            break
+    # print stats
+    print(
+        "\nNamed %d saints in %d seconds (%f S/m)"
+        % (stats.named, stats.elapsed, stats.saints_per_minute)
+    )
+    exit(0)
 
 
 if __name__ == "__main__":

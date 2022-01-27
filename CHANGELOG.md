@@ -1,10 +1,20 @@
 # Changelog
 
 - [Changelog](#changelog)
+  - [0.1.4](#014)
   - [0.1.3](#013)
   - [0.1.2](#012)
 
 ---
+
+## 0.1.4
+
+Released on ??
+
+- Added stats on exit
+  - named saints
+  - elapsed time
+  - Saints per minute
 
 ## 0.1.3
 
