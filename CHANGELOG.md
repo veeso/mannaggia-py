@@ -15,6 +15,7 @@ Released on ??
   - named saints
   - elapsed time
   - Saints per minute
+- Improved santiebeati.it api module performance
 
 ## 0.1.3
 

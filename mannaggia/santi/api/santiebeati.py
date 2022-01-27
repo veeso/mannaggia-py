@@ -28,11 +28,12 @@ class SantiEBeatiClient(Client):
 
     def query_santi(self, amount: int) -> List[Santo]:
         santi: List[Santo] = []
+        regex = re.compile(r"<[^>]+>")
         while len(santi) < amount:
-            santi.extend(self.__query_santi_by_random_letter())
+            santi.extend(self.__query_santi_by_random_letter(regex))
         return santi[:amount]
 
-    def __query_santi_by_random_letter(self) -> List[Santo]:
+    def __query_santi_by_random_letter(self, regex: Any) -> List[Santo]:
         """Query santi by random alphabet letter"""
         letter = random.choice(string.ascii_uppercase)
         try:
@@ -40,7 +41,6 @@ class SantiEBeatiClient(Client):
         except Exception as e:
             raise ClientError(e)
         result = []
-        regex = re.compile(r"<[^>]+>")
         for line in response.splitlines():
             santo = self.__get_santo_name(line, regex)
             if santo:
