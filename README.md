@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">Developed by <a href="https://veeso.github.io/" target="_blank">@veeso</a></p>
-<p align="center">Current version: 0.1.4 (25/01/2022)</p>
+<p align="center">Current version: 0.1.4 (30/01/2022)</p>
 
 <p align="center">
   <a href="http://www.wtfpl.net/about/"

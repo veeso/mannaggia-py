@@ -22,9 +22,9 @@ class Speaker(object):
         super().__init__()
 
     def play(self, audio: AudioSegment) -> None:
-        if os.name == 'nt':
+        if os.name == "nt":
             play(audio)
-        else: # don't print crap
+        else:  # don't print crap
             with NamedTemporaryFile("w+b", suffix=".wav", delete=False) as f:
                 audio.export(f.name, "wav")
                 devnull = open(os.devnull, "w")

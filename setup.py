@@ -26,6 +26,7 @@ setup(
         "pydub>=0.20.0",
         "requests>=2.20.0",
         "pathlib2>=2",
+        "simpleaudio>=1.0.0",
     ],
     entry_points={"console_scripts": ["mannaggia = mannaggia.__main__:main"]},
     packages=find_packages(),
